@@ -51,6 +51,7 @@ public class Dome : MonoBehaviour
 
     private void ReduceOxygen()
     {
+        Debug.Log(oxygenReduction);
         // TODO: Calculate reduction based on number of trees and amount of furnace uses
     }
 }

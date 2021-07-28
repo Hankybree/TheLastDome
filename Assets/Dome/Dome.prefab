@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   temperature: 30
   oxygen: 30
-  tempReduction: 0.01
+  tempReduction: 0.02
   oxygenReduction: 0.01
   tempLabel: {fileID: 0}
 --- !u!1001 &7755659805894017208

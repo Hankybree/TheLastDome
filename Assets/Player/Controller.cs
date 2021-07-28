@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     private CharacterController controller;
 
     [Header("Other")]
-    [SerializeField] GameObject furnace;
+    [SerializeField] Furnace furnace;
     private Inventory inventory;
 
     private void Start()
@@ -44,7 +44,7 @@ public class Controller : MonoBehaviour
 
             if (distanceY < 2.5f)
             {
-                furnace.GetComponent<Furnace>().HeatDome(inventory);
+                furnace.HeatDome(inventory);
             }
         }
     }
