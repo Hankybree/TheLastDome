@@ -160,5 +160,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e7c3e321cba4ca4a944f6c6a92c9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wood: 200
+  wood: 10
   label: {fileID: 0}

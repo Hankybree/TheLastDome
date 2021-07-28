@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Furnace : MonoBehaviour
 {
+    [SerializeField] GameObject dome;
+
     public void HeatDome(Inventory inventory)
     {
         if (inventory.Wood > 0)
         {
-            Debug.Log("Temp + 5");
+            dome.GetComponent<Dome>().Temperature += 5;
             inventory.Wood--;
         }
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] int wood = 200;
+    [SerializeField] int wood = 10;
     [SerializeField] GameObject label;
 
     public int Wood
