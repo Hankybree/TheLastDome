@@ -7,6 +7,7 @@ public class Dome : MonoBehaviour
     [Header("Environment")]
     [SerializeField] double temperature = 30;
     [SerializeField] double oxygen = 30;
+    private int numberOfTrees = 0;
 
     [Header("Reduce values")]
     [SerializeField] double tempReduction = 0.01;
@@ -14,6 +15,7 @@ public class Dome : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] GameObject tempLabel;
+    [SerializeField] GameObject nrOfTreesLabel;
 
     public double Temperature
     {
@@ -36,6 +38,18 @@ public class Dome : MonoBehaviour
         set
         {
             oxygen = value;
+        }
+    }
+    public int NumberOfTrees
+    {
+        get
+        {
+            return numberOfTrees;
+        }
+        set
+        {
+            numberOfTrees = value;
+            nrOfTreesLabel.GetComponent<TextMeshProUGUI>().text = "Trees: " + numberOfTrees;
         }
     }
 

@@ -7,9 +7,14 @@ public class Controller : MonoBehaviour
     [SerializeField] Vector3 cameraOffset;
     private CharacterController controller;
 
-    [Header("Other")]
+    [Header("Interactions")]
     [SerializeField] Furnace furnace;
+    [SerializeField] GameObject tree;
+    [SerializeField] Dome dome;
+
     private Inventory inventory;
+    private bool canPlant = true;
+    private const string treeTag = "Tree";
 
     private void Start()
     {
@@ -21,6 +26,23 @@ public class Controller : MonoBehaviour
     {
         MovePlayer();
         UseFurnace();
+        PlantTree();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == treeTag)
+        {
+            canPlant = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == treeTag)
+        {
+            canPlant = true;
+        }
     }
 
     private void MovePlayer()
@@ -46,6 +68,16 @@ public class Controller : MonoBehaviour
             {
                 furnace.HeatDome(inventory);
             }
+        }
+    }
+
+    private void PlantTree()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && inventory.Wood > 0 && canPlant)
+        {
+            inventory.Wood -= 1;
+            Instantiate(tree, new Vector3(transform.position.x, 0, transform.position.z + 1), Quaternion.identity);
+            dome.NumberOfTrees += 1;
         }
     }
 }

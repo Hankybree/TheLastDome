@@ -149,6 +149,8 @@ MonoBehaviour:
   moveSpeed: 10
   cameraOffset: {x: 0, y: 8.5, z: -7}
   furnace: {fileID: 0}
+  tree: {fileID: 6781177441754408294, guid: 9be458808bb8645678273225cfd7e4ea, type: 3}
+  dome: {fileID: 0}
 --- !u!114 &2119166716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +180,4 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   health: 100
   dome: {fileID: 0}
+  healthTicks: 1
