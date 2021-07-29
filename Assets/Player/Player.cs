@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     private void TakeDamage()
     {
-        if (dome.Temperature < 0 || dome.Temperature > 30)
+        if (dome.Temperature < 0 || dome.Temperature > 30 || dome.Oxygen < 0)
         {
             Health -= 1;
         }

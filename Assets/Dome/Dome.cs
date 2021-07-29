@@ -11,10 +11,12 @@ public class Dome : MonoBehaviour
 
     [Header("Reduce values")]
     [SerializeField] double tempReduction = 0.01;
-    [SerializeField] double oxygenReduction = 0.01;
+    [SerializeField] double oxygenReduction = 1;
+    [SerializeField] float oxygenTicks = 1;
 
     [Header("UI Elements")]
     [SerializeField] GameObject tempLabel;
+    [SerializeField] GameObject oxygenLabel;
     [SerializeField] GameObject nrOfTreesLabel;
 
     public double Temperature
@@ -38,6 +40,7 @@ public class Dome : MonoBehaviour
         set
         {
             oxygen = value;
+            oxygenLabel.GetComponent<TextMeshProUGUI>().text = "Oxygen: " + Math.Round(oxygen, 1);
         }
     }
     public int NumberOfTrees
@@ -53,6 +56,11 @@ public class Dome : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        InvokeRepeating(nameof(ReduceOxygen), oxygenTicks, oxygenTicks);
+    }
+
     private void Update()
     {
         ReduceTemp();
@@ -65,7 +73,6 @@ public class Dome : MonoBehaviour
 
     private void ReduceOxygen()
     {
-        Debug.Log(oxygenReduction);
-        // TODO: Calculate reduction based on number of trees and amount of furnace uses
+        Oxygen -= oxygenReduction;
     }
 }

@@ -7,11 +7,13 @@ public class Planter : MonoBehaviour
     [SerializeField] float startScale;
     [SerializeField] float growthRatio;
     private float currentScale;
-    private bool grownUp = false;
     
     void Start()
     {
-        transform.localScale = new Vector3(startScale, startScale, startScale);
+        if (!gameObject.GetComponentInParent<Tree>().GrownUp)
+        {
+            transform.localScale = new Vector3(startScale, startScale, startScale);
+        }
     }
 
     void Update()
@@ -23,7 +25,7 @@ public class Planter : MonoBehaviour
         }
         else
         {
-            grownUp = true;
+            gameObject.GetComponentInParent<Tree>().GrownUp = true;
         }
     }
 }

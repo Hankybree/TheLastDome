@@ -11,6 +11,7 @@ public class Furnace : MonoBehaviour
         if (inventory.Wood > 0)
         {
             dome.Temperature += 5;
+            dome.Oxygen -= 5;
             inventory.Wood--;
         }
     }
