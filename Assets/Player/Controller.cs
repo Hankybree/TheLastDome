@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
@@ -11,10 +13,11 @@ public class Controller : MonoBehaviour
     [SerializeField] Furnace furnace;
     [SerializeField] GameObject tree;
     [SerializeField] Dome dome;
+    [SerializeField] float plantCooldown;
 
     private Inventory inventory;
     private bool canPlant = true;
-    private const string treeTag = "Tree";
+    private bool isPlantCooldown = false;
 
     private void Start()
     {
@@ -31,18 +34,12 @@ public class Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == treeTag)
-        {
-            canPlant = false;
-        }
+        canPlant = CanPlant(other.tag, canPlant);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == treeTag)
-        {
-            canPlant = true;
-        }
+        canPlant = CanPlant(other.tag, canPlant);
     }
 
     private void MovePlayer()
@@ -71,13 +68,30 @@ public class Controller : MonoBehaviour
         }
     }
 
+    private bool CanPlant(string tag, bool currentState)
+    {
+        if (tag == Tags.tree || tag == Tags.furnace)
+        {
+            return !currentState;
+        }
+
+        return currentState;
+    }
+
+    private IEnumerator StartPlantCooldown()
+    {
+        isPlantCooldown = true;
+        yield return new WaitForSeconds(plantCooldown);
+        isPlantCooldown = false;
+    }
+
     private void PlantTree()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && inventory.Wood > 0 && canPlant)
+        if (Input.GetKeyDown(KeyCode.Q) && inventory.Wood > 0 && canPlant && !isPlantCooldown)
         {
+            StartCoroutine(StartPlantCooldown());
             inventory.Wood -= 1;
-            Instantiate(tree, new Vector3(transform.position.x, 0, transform.position.z + 1), Quaternion.identity);
-            dome.NumberOfTrees += 1;
+            dome.PlantTree(tree, new Vector3(transform.position.x, 0, transform.position.z + 1));
         }
     }
 }

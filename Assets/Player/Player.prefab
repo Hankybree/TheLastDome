@@ -151,6 +151,7 @@ MonoBehaviour:
   furnace: {fileID: 0}
   tree: {fileID: 6781177441754408294, guid: 9be458808bb8645678273225cfd7e4ea, type: 3}
   dome: {fileID: 0}
+  plantCooldown: 0.5
 --- !u!114 &2119166716
 MonoBehaviour:
   m_ObjectHideFlags: 0
