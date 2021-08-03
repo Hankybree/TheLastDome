@@ -115,7 +115,7 @@ public class Controller : MonoBehaviour
 
     private void PlantTree(float distance, Vector3 clickPos)
     {
-        if (distance < player.Range && inventory.Wood > 0 && canPlant && !isPlantCooldown)
+        if (distance < (player.Range + player.ExtraPlantRange) && inventory.Wood > 0 && canPlant && !isPlantCooldown)
         {
             StartCoroutine(StartPlantCooldown());
             inventory.Wood -= 1;

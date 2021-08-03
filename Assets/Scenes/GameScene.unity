@@ -1422,7 +1422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3652911959133923861, guid: 57b6cfc05fc7c405f943dbaaf04bf5df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.8
+      value: 18.49
       objectReference: {fileID: 0}
     - target: {fileID: 3652911959133923861, guid: 57b6cfc05fc7c405f943dbaaf04bf5df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1647,6 +1647,10 @@ PrefabInstance:
       propertyPath: nrOfTreesLabel
       value: 
       objectReference: {fileID: 988575677}
+    - target: {fileID: 7449176234876714473, guid: d3b107b605d8548c8b827d066258de19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7755659806877771792, guid: d3b107b605d8548c8b827d066258de19, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1694,6 +1698,18 @@ PrefabInstance:
     - target: {fileID: 7755659806877771793, guid: d3b107b605d8548c8b827d066258de19, type: 3}
       propertyPath: m_Name
       value: Dome
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794353258044843859, guid: d3b107b605d8548c8b827d066258de19, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794353258044843859, guid: d3b107b605d8548c8b827d066258de19, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962222774964984892, guid: d3b107b605d8548c8b827d066258de19, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3b107b605d8548c8b827d066258de19, type: 3}
