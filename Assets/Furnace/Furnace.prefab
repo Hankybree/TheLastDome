@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dome: {fileID: 0}
+  oxygenReduction: 3
+  temperatureIncrease: 5
 --- !u!65 &2938843826203827643
 BoxCollider:
   m_ObjectHideFlags: 0

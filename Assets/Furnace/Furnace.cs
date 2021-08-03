@@ -5,13 +5,15 @@ using UnityEngine;
 public class Furnace : MonoBehaviour
 {
     [SerializeField] Dome dome;
+    [SerializeField] int oxygenReduction = 3;
+    [SerializeField] int temperatureIncrease = 5;
 
     public void HeatDome(Inventory inventory)
     {
         if (inventory.Wood > 0)
         {
-            dome.Temperature += 5;
-            dome.Oxygen -= 5;
+            dome.Temperature += temperatureIncrease;
+            dome.Oxygen -= oxygenReduction;
             inventory.Wood--;
         }
     }

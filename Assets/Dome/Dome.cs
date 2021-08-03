@@ -8,7 +8,6 @@ public class Dome : MonoBehaviour
     [Header("Environment")]
     [SerializeField] double temperature = 30;
     [SerializeField] double oxygen = 30;
-    //private int numberOfTrees = 10;
     [SerializeField] GameObject treeManager;
     private List<GameObject> trees;
 
@@ -77,14 +76,26 @@ public class Dome : MonoBehaviour
             trees.Add(tree.gameObject);
         }
 
-        nrOfTreesLabel.GetComponent<TextMeshProUGUI>().text = "Trees: " + trees.Count;
+        UpdateTreeLabel();
     }
 
-    public void PlantTree(GameObject tree, Vector3 position)
+    public void AddTree(GameObject tree, Vector3 position)
     {
         GameObject newTree = Instantiate(tree, position, Quaternion.identity);
         newTree.transform.parent = treeManager.transform;
         trees.Add(newTree);
+        UpdateTreeLabel();
+    }
+
+    public void RemoveTree(GameObject tree)
+    {
+        trees.Remove(tree);
+        Destroy(tree);
+        UpdateTreeLabel();
+    }
+
+    private void UpdateTreeLabel()
+    {
         nrOfTreesLabel.GetComponent<TextMeshProUGUI>().text = "Trees: " + trees.Count;
     }
 }

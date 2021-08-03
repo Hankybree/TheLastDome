@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e7c3e321cba4ca4a944f6c6a92c9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wood: 10
+  wood: 0
   label: {fileID: 0}
 --- !u!114 &488183777
 MonoBehaviour:
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
-  health: 100
+  health: 10
+  range: 3
   dome: {fileID: 0}
   healthTicks: 1

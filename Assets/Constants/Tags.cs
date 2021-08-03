@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tags
 {
-    public static readonly string tree = "Tree";
-    public static readonly string furnace = "Furnace";
+    public const string tree    = "Tree";
+    public const string furnace = "Furnace";
+    public const string ground  = "Ground";
+    public const string enemy   = "Enemy";
 }

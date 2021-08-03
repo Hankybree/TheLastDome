@@ -16,6 +16,7 @@ public class Controller : MonoBehaviour
     [SerializeField] float plantCooldown;
 
     private Inventory inventory;
+    private Player player;
     private bool canPlant = true;
     private bool isPlantCooldown = false;
 
@@ -24,16 +25,15 @@ public class Controller : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         inventory  = GetComponent<Inventory>();
+        player     = GetComponent<Player>();
     }
 
     private void Update()
     {
         HandleClick();
         MovePlayer();
-        UseFurnace();
-        PlantTree();
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         canPlant = CanPlant(other.tag, canPlant);
@@ -43,6 +43,7 @@ public class Controller : MonoBehaviour
     {
         canPlant = CanPlant(other.tag, canPlant);
     }
+    */
     #endregion
 
     #region Movement
@@ -67,40 +68,73 @@ public class Controller : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100, Mask.interactable))
+            if (Physics.Raycast(ray, out hit, 100, Masks.interactable))
             {
-                print(hit.collider.tag);
-                print(Vector3.Distance(hit.point, transform.position));
+                string     tag           = hit.collider.tag;
+                float      distance      = Vector3.Distance(hit.point, transform.position);
+                Vector3    clickPos      = hit.point;
+                GameObject clickedObject = hit.collider.gameObject;
+
+                print(tag);
+                print(distance);
+                print(clickPos);
+
+                ParseClick(tag, distance, clickPos, clickedObject);
             }
         }
     }
 
-    private void UseFurnace()
+    private void ParseClick(string tag, float distance, Vector3 clickPos, GameObject clickedObject)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        switch (tag)
         {
-            float distanceY = furnace.transform.position.z - transform.position.z;
-
-            if (distanceY < 2.5f)
-            {
-                furnace.HeatDome(inventory);
-            }
+            case Tags.furnace:
+                UseFurnace(distance);
+                break;
+            case Tags.tree:
+                ChopDownTree(distance, clickedObject);
+                break;
+            case Tags.ground:
+                PlantTree(distance, clickPos);
+                break;
+            case Tags.enemy:
+                AttackEnemy();
+                break;
+            default:
+                return;
         }
     }
 
-    private void PlantTree()
+    private void UseFurnace(float distance)
     {
-        if (Input.GetKeyDown(KeyCode.Q) && inventory.Wood > 0 && canPlant && !isPlantCooldown)
+        if (distance < player.Range)
+        {
+            furnace.HeatDome(inventory);
+        }
+    }
+
+    private void PlantTree(float distance, Vector3 clickPos)
+    {
+        if (distance < player.Range && inventory.Wood > 0 && canPlant && !isPlantCooldown)
         {
             StartCoroutine(StartPlantCooldown());
             inventory.Wood -= 1;
-            dome.PlantTree(tree, new Vector3(transform.position.x, 0, transform.position.z + 1));
+            dome.AddTree(tree, clickPos);
         }
     }
 
-    private void ChopDownTree()
+    private void ChopDownTree(float distance, GameObject tree)
     {
-
+        if (distance < player.Range)
+        {
+            GameObject treeParent = tree.transform.parent.gameObject;
+            Tree treeComponent = treeParent.GetComponent<Tree>();
+            if (treeComponent.GrownUp)
+            {
+                inventory.Wood += treeComponent.Wood;
+                dome.RemoveTree(treeParent);
+            }
+        }
     }
 
     private void AttackEnemy()
