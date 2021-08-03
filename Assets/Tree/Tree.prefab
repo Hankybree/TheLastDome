@@ -136,6 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146726116047648888}
   - component: {fileID: 8962899096608458905}
+  - component: {fileID: 2542259439903835402}
   m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
@@ -173,6 +174,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScale: 0.1
   growthRatio: 0.01
+  animationTime: 0.6
+--- !u!111 &2542259439903835402
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064753014622934010}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5c814aabd387d47d09136f2706e967a8, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5c814aabd387d47d09136f2706e967a8, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6781177440851164316
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,3 +333,5 @@ MonoBehaviour:
   grownUp: 0
   oxygenEmission: 0.1
   oxygenTicks: 1
+  minWood: 1
+  maxWood: 3

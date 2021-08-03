@@ -92,7 +92,7 @@ public class Controller : MonoBehaviour
                 UseFurnace(distance);
                 break;
             case Tags.tree:
-                ChopDownTree(distance, clickedObject);
+                StartCoroutine(ChopDownTree(distance, clickedObject));
                 break;
             case Tags.ground:
                 PlantTree(distance, clickPos);
@@ -123,14 +123,18 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private void ChopDownTree(float distance, GameObject tree)
+    private IEnumerator ChopDownTree(float distance, GameObject tree)
     {
         if (distance < player.Range)
         {
             GameObject treeParent = tree.transform.parent.gameObject;
+            TreeAnimations treeAnim = tree.transform.GetChild(0).gameObject.GetComponent<TreeAnimations>();
             Tree treeComponent = treeParent.GetComponent<Tree>();
             if (treeComponent.GrownUp)
             {
+                tree.GetComponent<BoxCollider>().enabled = false;
+                treeAnim.ChopAnimation();
+                yield return new WaitForSeconds(treeAnim.AnimationTime);
                 inventory.Wood += treeComponent.Wood;
                 dome.RemoveTree(treeParent);
             }
