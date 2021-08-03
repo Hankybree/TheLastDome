@@ -19,6 +19,7 @@ public class Controller : MonoBehaviour
     private bool canPlant = true;
     private bool isPlantCooldown = false;
 
+    #region Unity Functions
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -27,6 +28,7 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
+        HandleClick();
         MovePlayer();
         UseFurnace();
         PlantTree();
@@ -41,7 +43,9 @@ public class Controller : MonoBehaviour
     {
         canPlant = CanPlant(other.tag, canPlant);
     }
+    #endregion
 
+    #region Movement
     private void MovePlayer()
     {
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -53,6 +57,22 @@ public class Controller : MonoBehaviour
     private void MoveCamera()
     {
         Camera.main.transform.position = transform.position + cameraOffset;
+    }
+    #endregion
+
+    #region Interactions
+    private void HandleClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100, Mask.interactable))
+            {
+                print(hit.collider.tag);
+                print(Vector3.Distance(hit.point, transform.position));
+            }
+        }
     }
 
     private void UseFurnace()
@@ -68,6 +88,28 @@ public class Controller : MonoBehaviour
         }
     }
 
+    private void PlantTree()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && inventory.Wood > 0 && canPlant && !isPlantCooldown)
+        {
+            StartCoroutine(StartPlantCooldown());
+            inventory.Wood -= 1;
+            dome.PlantTree(tree, new Vector3(transform.position.x, 0, transform.position.z + 1));
+        }
+    }
+
+    private void ChopDownTree()
+    {
+
+    }
+
+    private void AttackEnemy()
+    {
+
+    }
+    #endregion
+
+    #region Rules
     private bool CanPlant(string tag, bool currentState)
     {
         if (tag == Tags.tree || tag == Tags.furnace)
@@ -84,14 +126,5 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(plantCooldown);
         isPlantCooldown = false;
     }
-
-    private void PlantTree()
-    {
-        if (Input.GetKeyDown(KeyCode.Q) && inventory.Wood > 0 && canPlant && !isPlantCooldown)
-        {
-            StartCoroutine(StartPlantCooldown());
-            inventory.Wood -= 1;
-            dome.PlantTree(tree, new Vector3(transform.position.x, 0, transform.position.z + 1));
-        }
-    }
+    #endregion
 }

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] int health = 100;
+    [SerializeField] float range = 1.5f;
 
     [Header("Other")]
     [SerializeField] Dome dome;
@@ -24,6 +25,13 @@ public class Player : MonoBehaviour
         {
             health = value;
             healthBar.GetComponent<TextMeshProUGUI>().text = "Health: " + health;
+        }
+    }
+    public float Range
+    {
+        get
+        {
+            return range;
         }
     }
 
