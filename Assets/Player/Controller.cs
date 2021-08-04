@@ -19,6 +19,7 @@ public class Controller : MonoBehaviour
     private Player player;
     private bool canPlant = true;
     private bool isPlantCooldown = false;
+    private bool canChop = false;
 
     #region Unity Functions
     private void Start()
@@ -33,17 +34,18 @@ public class Controller : MonoBehaviour
         HandleClick();
         MovePlayer();
     }
-    /*
+    
     private void OnTriggerEnter(Collider other)
     {
-        canPlant = CanPlant(other.tag, canPlant);
+        //canPlant = CanPlant(other.tag, canPlant);
+        //canChop = CanChop(other.tag, canChop);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        canPlant = CanPlant(other.tag, canPlant);
+        //canPlant = CanPlant(other.tag, canPlant);
+        //canChop = CanChop(other.tag, canChop);
     }
-    */
     #endregion
 
     #region Movement
@@ -125,7 +127,7 @@ public class Controller : MonoBehaviour
 
     private IEnumerator ChopDownTree(float distance, GameObject tree)
     {
-        if (distance < player.Range)
+        if (distance < player.Range + player.ExtraChopRange)
         {
             GameObject treeParent = tree.transform.parent.gameObject;
             TreeAnimations treeAnim = tree.transform.GetChild(0).gameObject.GetComponent<TreeAnimations>();
@@ -133,6 +135,7 @@ public class Controller : MonoBehaviour
             if (treeComponent.GrownUp)
             {
                 tree.GetComponent<BoxCollider>().enabled = false;
+                tree.GetComponent<CapsuleCollider>().enabled = false;
                 treeAnim.ChopAnimation();
                 yield return new WaitForSeconds(treeAnim.AnimationTime);
                 inventory.Wood += treeComponent.Wood;
@@ -151,6 +154,16 @@ public class Controller : MonoBehaviour
     private bool CanPlant(string tag, bool currentState)
     {
         if (tag == Tags.tree || tag == Tags.furnace)
+        {
+            return !currentState;
+        }
+
+        return currentState;
+    }
+
+    private bool CanChop(string tag, bool currentState)
+    {
+        if (tag == Tags.tree)
         {
             return !currentState;
         }

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] int health = 100;
     [SerializeField] float range = 3f;
     [SerializeField] float extraPlantRange = 2f;
+    [SerializeField] float extraChopRange = 1f;
 
     [Header("Other")]
     [SerializeField] Dome dome;
@@ -40,6 +41,13 @@ public class Player : MonoBehaviour
         get
         {
             return extraPlantRange;
+        }
+    }
+    public float ExtraChopRange
+    {
+        get
+        {
+            return extraChopRange;
         }
     }
 
