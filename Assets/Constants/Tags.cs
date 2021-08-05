@@ -8,4 +8,5 @@ public class Tags
     public const string furnace = "Furnace";
     public const string ground  = "Ground";
     public const string enemy   = "Enemy";
+    public const string wood    = "Wood";
 }

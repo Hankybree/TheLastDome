@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startScale: 0.1
-  growthRatio: 0.01
+  growthRatio: 1
   animationTime: 0.6
 --- !u!111 &2542259439903835402
 Animation:
@@ -348,5 +348,6 @@ MonoBehaviour:
   grownUp: 0
   oxygenEmission: 0.1
   oxygenTicks: 1
+  woodObject: {fileID: 7140101198375504687, guid: b9393357944184b7fac655d47bc98c0b, type: 3}
   minWood: 1
   maxWood: 3

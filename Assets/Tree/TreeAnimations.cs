@@ -40,7 +40,7 @@ public class TreeAnimations : MonoBehaviour
     {
         if (transform.localScale.x < 1)
         {
-            currentScale += growthRatio;
+            currentScale += growthRatio * Time.deltaTime;
             transform.localScale = new Vector3(currentScale, currentScale, currentScale);
         }
         else

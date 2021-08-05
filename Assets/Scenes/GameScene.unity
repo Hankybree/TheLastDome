@@ -1708,10 +1708,6 @@ PrefabInstance:
       propertyPath: nrOfTreesLabel
       value: 
       objectReference: {fileID: 988575677}
-    - target: {fileID: 4997598218003040504, guid: d3b107b605d8548c8b827d066258de19, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 88cc4ba4f0eb14c79b23c7557f6cf606, type: 2}
     - target: {fileID: 7755659806877771792, guid: d3b107b605d8548c8b827d066258de19, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1759,10 +1755,6 @@ PrefabInstance:
     - target: {fileID: 7755659806877771793, guid: d3b107b605d8548c8b827d066258de19, type: 3}
       propertyPath: m_Name
       value: Dome
-      objectReference: {fileID: 0}
-    - target: {fileID: 8962222774964984892, guid: d3b107b605d8548c8b827d066258de19, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3b107b605d8548c8b827d066258de19, type: 3}

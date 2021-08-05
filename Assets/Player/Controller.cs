@@ -39,6 +39,7 @@ public class Controller : MonoBehaviour
     {
         //canPlant = CanPlant(other.tag, canPlant);
         //canChop = CanChop(other.tag, canChop);
+        PickUpWood(other.tag, other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
@@ -138,7 +139,7 @@ public class Controller : MonoBehaviour
                 tree.GetComponent<CapsuleCollider>().enabled = false;
                 treeAnim.ChopAnimation();
                 yield return new WaitForSeconds(treeAnim.AnimationTime);
-                inventory.Wood += treeComponent.Wood;
+                treeComponent.DropWood();
                 dome.RemoveTree(treeParent);
             }
         }
@@ -147,6 +148,15 @@ public class Controller : MonoBehaviour
     private void AttackEnemy()
     {
 
+    }
+
+    private void PickUpWood(string tag, GameObject wood)
+    {
+        if (tag == Tags.wood)
+        {
+            inventory.Wood += 1;
+            Destroy(wood);
+        }
     }
     #endregion
 
